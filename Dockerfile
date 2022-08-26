@@ -1,0 +1,4 @@
+FROM postgres
+
+ENV POSTGRES_PASSWORD shorter
+ENV POSTGRES_DB shorter
