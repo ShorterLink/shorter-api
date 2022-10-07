@@ -22,6 +22,8 @@ defmodule ShorterApiWeb.Router do
     resources "/users", UsersController, only: [:show, :delete, :update]
     resources "/links", LinksController, only: [:create, :show, :delete, :update, :index]
     get "/links/:id/view", LinksController, :count_view
+
+    get "/me", AuthController, :me
   end
 
   # Enables LiveDashboard only for development

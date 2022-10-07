@@ -8,7 +8,8 @@
 import Config
 
 config :shorterApi,
-  ecto_repos: [ShorterApi.Repo]
+  ecto_repos: [ShorterApi.Repo],
+  front_base_url: "http://localhost"
 
 # Configures the endpoint
 config :shorterApi, ShorterApiWeb.Endpoint,

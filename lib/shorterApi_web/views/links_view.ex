@@ -82,8 +82,6 @@ defmodule ShorterApiWeb.LinksView do
         "show_all.json",
         %{link: link}
       ) do
-    IO.puts(link.page_number)
-
     %{
       data: render_many(link, ShorterApiWeb.LinksView, "link.json"),
       page_number: link.page_number,
@@ -94,10 +92,12 @@ defmodule ShorterApiWeb.LinksView do
   end
 
   def render("link.json", %{links: link}) do
+    {:ok, front_base_url} = Application.fetch_env(:shorterApi, :front_base_url)
+
     %{
       id: link.id,
       name: link.name,
-      hash: link.hash,
+      hash_url: "#{front_base_url}/#{link.hash}",
       clicks: link.clicks,
       url: link.url,
       enabled: link.enabled,

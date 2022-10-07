@@ -9,4 +9,19 @@ defmodule ShorterApiWeb.AuthView do
       token: token
     }
   end
+
+  def render("me.json", %{
+        user: %User{id: id, name: name, email: email, inserted_at: inserted_at},
+        token: token
+      }) do
+    %{
+      user: %{
+        id: id,
+        name: name,
+        email: email,
+        inserted_at: inserted_at
+      },
+      token: token
+    }
+  end
 end

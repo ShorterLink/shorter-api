@@ -46,7 +46,8 @@ defmodule ShorterApi.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:argon2_elixir, "~> 3.0"},
       {:guardian, "~> 2.0"},
-      {:scrivener_ecto, "~> 2.0"}
+      {:scrivener_ecto, "~> 2.0"},
+      {:corsica, "~> 1.0"}
     ]
   end
 

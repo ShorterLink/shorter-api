@@ -1,5 +1,5 @@
 defmodule ShorterApi.Link.GetAll do
-  import Ecto.Query, only: [where: 3]
+  import Ecto.Query, only: [where: 3, order_by: 2]
   alias ShorterApi.{Repo, Link}
   alias Ecto.UUID
 
@@ -24,6 +24,7 @@ defmodule ShorterApi.Link.GetAll do
       |> Map.put_new("show_disabled", false)
 
     Link
+    |> order_by(desc: :inserted_at)
     |> Repo.paginate(page: params["page_number"], page_size: params["page_size"])
   end
 end

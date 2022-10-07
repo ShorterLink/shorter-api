@@ -31,12 +31,28 @@ config :shorterApi, ShorterApiWeb.Endpoint,
   secret_key_base: "your-key"
 ```
 
+Adjust the `config.exs` settings:
+
+```elixir
+...
+config :shorterApi,
+  ...
+  front_base_url: "http://localhost"
+  ...
+```
+
 > you can generate new keys with `mix phx.gen.secret` and copy it.
 
 Migrate your database:
 
 ```bash
 mix ecto.migrate
+```
+
+Seed your database:
+
+```bash
+mix run priv/repo/seeds.exs
 ```
 
 Start Server:

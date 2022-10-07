@@ -13,22 +13,33 @@ defmodule ShorterApiWeb.AuthController do
     end
   end
 
-  def update(conn, params) do
-    params
-    |> ShorterApi.update_user()
-    |> handle_response(conn, "update.json", :ok)
+  def me(conn, params) do
+    token = get_token(conn)
+
+    result = Guardian.decode_and_verify(token)
+
+    case result do
+      {:ok, claims} -> valid_session(conn, token)
+      _ -> text(conn, "error")
+    end
   end
 
-  def delete(conn, %{"id" => id}) do
-    id
-    |> ShorterApi.delete_user()
-    |> handle_delete(conn)
+  defp valid_session(conn, token) do
+    {:ok, resource, claims} = Guardian.resource_from_token(token)
+    IO.inspect(resource)
+
+    {:ok, user} = resource
+
+    conn
+    |> render("me.json", %{user: user, token: token})
   end
 
-  def show(conn, %{"id" => id}) do
-    id
-    |> ShorterApi.fetch_user()
-    |> handle_response(conn, "show.json", :ok)
+  defp get_token(conn) do
+    token =
+      get_req_header(conn, "authorization")
+      |> Enum.at(0)
+      |> String.split(" ")
+      |> Enum.at(1)
   end
 
   defp handle_delete({:ok, _user}, conn) do

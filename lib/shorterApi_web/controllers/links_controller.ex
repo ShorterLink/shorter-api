@@ -14,7 +14,9 @@ defmodule ShorterApiWeb.LinksController do
   def create(conn, params) do
     {:ok, user} = Guardian.Plug.current_resource(conn)
 
-    params = Map.put_new(params, "hash", Link.generate_hash())
+    params =
+      Map.put_new(params, "hash", Link.generate_hash())
+      |> Map.put_new("name", "Untitled")
 
     %{"name" => name, "hash" => hash, "url" => url} = params
 
