@@ -12,7 +12,7 @@ defmodule ShorterApi.Link.Create do
 
     case check do
       nil -> Repo.insert(struct)
-      _ -> create_link({:error, "Hash already taken"})
+      _ -> create_link({:error, %{hash: "Hash already taken"}})
     end
   end
 
